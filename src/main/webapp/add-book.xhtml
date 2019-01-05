@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <h:form>
+        <p:menu>
+            <p:menuitem value="Add Author" url="http://localhost:8080/sin-example-project/add-author.jsf"/>
+            <p:menuitem value="Add Book" url="http://localhost:8080/sin-example-project/add-book.jsf"/>
+            <p:menuitem value="Add Library" url="http://localhost:8080/sin-example-project/add-library.jsf"/>
+            <p:menuitem value="Add Publisher" url="http://localhost:8080/sin-example-project/add-publisher.jsf"/>
+            <p:menuitem value="Add Book To Library" url="http://localhost:8080/sin-example-project/add-book-to-library.jsf"/>
+            <p:menuitem value="Author sign Publisher" url="http://localhost:8080/sin-example-project/author-sign-publisher.jsf"/>
+            <p:menuitem value="Publish Book" url="http://localhost:8080/sin-example-project/publish-book.jsf"/>
+        </p:menu>
+        <h2>Add book</h2>
+        <h:panelGrid columns="3">
+            <h:outputLabel for="name">Book name:</h:outputLabel>
+            <h:inputText id="name" value="#{newBook.name}"/>
+            <h:message for="name" errorClass="invalid"/>
+
+            <h:outputLabel for="isbn">ISBN:</h:outputLabel>
+            <h:inputText id="isbn" value="#{newBook.isbn}"/>
+            <h:message for="isbn" errorClass="invalid"/>
+
+            <h:outputLabel for="genre">Genre:</h:outputLabel>
+            <h:inputText id="genre" value="#{newBook.genre}"/>
+            <h:message for="genre" errorClass="invalid"/>
+
+            <h:outputLabel for="author">Author:</h:outputLabel>
+            <h:selectOneMenu id="author" value="#{addNewBookController.author}" converter="#{authorValueConventer}" var="items_var">
+                <f:selectItems value="#{addNewBookController.authors}" var="author_var"
+                               itemLabel="#{author_var.surname}" itemValue="#{author_var}"/>
+            </h:selectOneMenu>
+            <h:message for="author" errorClass="invalid"/>
+        </h:panelGrid>
+        <p>
+            <h:panelGrid columns="2">
+                <h:commandButton id="addbook"
+                                 action="#{addNewBookController.addNewBook}"
+                                 value="Add Book" styleClass="addbook"/>
+                <h:messages styleClass="messages"
+                            errorClass="invalid" infoClass="valid"
+                            warnClass="warning" globalOnly="true"/>
+            </h:panelGrid>
+        </p>
+    </h:form>
+</f:view>
+</html>
